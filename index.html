@@ -132,6 +132,11 @@ td { font-size: 15px; text-align: right; padding: 7px 0; border-top: 1px solid v
 'use strict';
 var API_BASE = 'https://rzqirgpkcmemlhttboha.supabase.co/functions/v1/gym';
 var KEY = localStorage.getItem('gk') || '';
+if (location.hash.indexOf('#k=') === 0) {
+  KEY = decodeURIComponent(location.hash.slice(3));
+  localStorage.setItem('gk', KEY);
+  history.replaceState(null, '', location.pathname + location.search);
+}
 var D = null;
 var S = { tab: 'fit', wdate: today(), fdate: today(), bp: null, eq: 'all', ex: null, selW: null, selR: null };
 var BPS = [['chest','Chest'],['back','Back'],['shoulders','Shoulders'],['biceps','Biceps'],['triceps','Triceps'],['legs','Legs'],['core','Core']];
