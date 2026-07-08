@@ -409,6 +409,22 @@ function viewExercise(){
   return h;
 }
 
+function libResults(){
+  var q = (S.libq || '').toLowerCase().trim();
+  if (q.length < 2) return '<div class="sub small mt">Type 2+ letters to search the Reload menu.</div>';
+  var toks = q.split(/\s+/);
+  var hits = D.library.filter(function(x){
+    var n = x.name.toLowerCase();
+    return toks.every(function(t){ return n.indexOf(t) >= 0; });
+  }).slice(0, 8);
+  if (!hits.length) return '<div class="sub small mt">No match on the menu.</div>';
+  return hits.map(function(x){
+    return '<div class="listrow" data-act="lib" data-v="' + x.id + '" style="cursor:pointer"><div class="grow"><div class="exname">' + esc(x.name) + '</div>' +
+      '<div class="sub small">' + r0(x.calories) + ' kcal &middot; ' + r0(x.protein) + 'P ' + r0(x.carbs) + 'C ' + r0(x.fat) + 'F</div></div>' +
+      '<div class="muted" style="font-size:22px;padding:0 6px">+</div></div>';
+  }).join('');
+}
+
 function viewFood(){
   var st = D.settings;
   var entries = foodFor(S.fdate);
@@ -430,6 +446,9 @@ function viewFood(){
     });
     h += '</div>';
   }
+  h += '<div class="card"><h2>Reload menu</h2>' +
+    '<div class="mt"><input id="libq" placeholder="Search: salmon, kebab, shake..." value="' + esc(S.libq || '') + '"></div>' +
+    '<div id="libres">' + libResults() + '</div></div>';
   h += '<div class="card"><h2>Add food</h2>' +
     '<div class="mt"><input id="fdesc" placeholder="What did you eat?"></div>' +
     '<div class="row mt">' +
@@ -636,6 +655,11 @@ document.body.addEventListener('click', function(ev){
     }).catch(function(e){ toast(e.message); });
   }
   else if (act === 'addfood') { addFood(null); }
+  else if (act === 'lib') {
+    var li = null;
+    D.library.forEach(function(x){ if (x.id === v) li = x; });
+    if (li) addFood({ description: li.name, protein: li.protein, carbs: li.carbs, fat: li.fat, calories: li.calories });
+  }
   else if (act === 'fav') {
     var fv = null;
     D.favorites.forEach(function(x){ if (x.id === v) fv = x; });
@@ -683,6 +707,14 @@ document.body.addEventListener('click', function(ev){
   }
 });
 
+
+document.body.addEventListener('input', function(ev){
+  if (ev.target && ev.target.id === 'libq') {
+    S.libq = ev.target.value;
+    var res = document.getElementById('libres');
+    if (res) res.innerHTML = libResults();
+  }
+});
 boot();
 </script>
 </body>
