@@ -7,38 +7,29 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Gym">
-<meta name="theme-color" content="#f9f9f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0b0c09">
 <title>Gym</title>
 <style>
 :root {
-  --bg: #f9f9f7; --card: #fcfcfb; --ink: #0b0b0b; --ink2: #52514e;
-  --muted: #898781; --line: #e1e0d9; --grid: #e1e0d9;
-  --accent: #2a78d6; --accent-ink: #ffffff; --good: #006300;
-  --chip: #f0efec; --danger: #d03b3b;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0d0d0d; --card: #1a1a19; --ink: #ffffff; --ink2: #c3c2b7;
-    --muted: #898781; --line: #2c2c2a; --grid: #2c2c2a;
-    --accent: #3987e5; --accent-ink: #ffffff; --good: #0ca30c;
-    --chip: #262625; --danger: #e66767;
-  }
+  --bg: #0b0c09; --card: #15160f; --card2: #1d1e16; --ink: #f2f3ec; --ink2: #9fa096;
+  --muted: #70716a; --line: rgba(255,255,255,0.06); --grid: #2a2b23;
+  --accent: #d7f000; --accent-ink: #14150a; --good: #d7f000;
+  --chip: #20211a; --track: #23241d; --danger: #ff7a68;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body {
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   background: var(--bg); color: var(--ink); font-size: 16px;
-  padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  padding-bottom: calc(84px + env(safe-area-inset-bottom));
 }
-#app { max-width: 560px; margin: 0 auto; padding: 14px 14px 0; }
-h1 { font-size: 20px; font-weight: 700; }
-h2 { font-size: 17px; font-weight: 700; }
+#app { max-width: 560px; margin: 0 auto; padding: 18px 16px 0; }
+h1 { font-size: 25px; font-weight: 750; letter-spacing: -0.4px; }
+h2 { font-size: 16px; font-weight: 700; letter-spacing: -0.2px; }
 .sub { color: var(--ink2); font-size: 13px; }
 .muted { color: var(--muted); }
 .card {
   background: var(--card); border: 1px solid var(--line);
-  border-radius: 14px; padding: 14px; margin-top: 12px;
+  border-radius: 22px; padding: 16px; margin-top: 12px;
 }
 .row { display: flex; align-items: center; gap: 8px; }
 .grow { flex: 1; }
@@ -47,25 +38,25 @@ h2 { font-size: 17px; font-weight: 700; }
 .chips.scroll::-webkit-scrollbar { display: none; }
 .chip {
   border: 1px solid var(--line); background: var(--chip); color: var(--ink);
-  border-radius: 999px; padding: 9px 15px; font-size: 15px; font-weight: 600;
+  border-radius: 999px; padding: 10px 16px; font-size: 14px; font-weight: 600;
   white-space: nowrap; cursor: pointer; user-select: none;
 }
-.chip.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.chip.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 750; }
 .chip.hint { border-style: dashed; color: var(--ink2); background: transparent; }
 button.btn {
-  width: 100%; border: 0; border-radius: 12px; padding: 15px;
+  width: 100%; border: 0; border-radius: 999px; padding: 17px;
   background: var(--accent); color: var(--accent-ink);
-  font-size: 17px; font-weight: 700; margin-top: 12px; cursor: pointer;
+  font-size: 16px; font-weight: 800; margin-top: 14px; cursor: pointer;
 }
 button.btn:disabled { opacity: .45; }
 .icon-btn {
-  border: 1px solid var(--line); background: var(--card); color: var(--ink);
-  border-radius: 10px; width: 38px; height: 38px; font-size: 18px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--chip); color: var(--ink);
+  border-radius: 13px; width: 40px; height: 40px; font-size: 18px; cursor: pointer;
   display: flex; align-items: center; justify-content: center; flex: none;
 }
 .listrow {
   display: flex; align-items: center; gap: 10px;
-  padding: 11px 2px; border-top: 1px solid var(--line);
+  padding: 12px 2px; border-top: 1px solid var(--line);
 }
 .listrow:first-of-type { border-top: 0; }
 .del {
@@ -73,55 +64,61 @@ button.btn:disabled { opacity: .45; }
   font-size: 20px; padding: 4px 8px; cursor: pointer; flex: none;
 }
 .star { border: 0; background: transparent; font-size: 18px; padding: 4px 6px; cursor: pointer; flex: none; color: var(--muted); }
-.star.on { color: #eda100; }
+.star.on { color: var(--accent); }
 input, select {
-  width: 100%; border: 1px solid var(--line); border-radius: 10px;
-  background: var(--bg); color: var(--ink); padding: 11px 12px; font-size: 16px;
+  width: 100%; border: 1px solid var(--line); border-radius: 14px;
+  background: #101109; color: var(--ink); padding: 12px 14px; font-size: 16px;
 }
+input::placeholder { color: var(--muted); }
 input:focus { outline: 2px solid var(--accent); border-color: transparent; }
 .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
 .tile {
   background: var(--card); border: 1px solid var(--line);
-  border-radius: 14px; padding: 12px 14px;
+  border-radius: 22px; padding: 14px 16px;
 }
-.tile .v { font-size: 26px; font-weight: 800; margin-top: 2px; }
+.tile .v { font-size: 28px; font-weight: 800; margin-top: 3px; letter-spacing: -0.5px; }
 .tile .l { font-size: 12px; color: var(--ink2); }
-.bar { height: 8px; border-radius: 4px; background: var(--chip); overflow: hidden; margin-top: 5px; }
-.bar i { display: block; height: 100%; border-radius: 4px; background: var(--accent); }
+.hero-num { font-size: 42px; font-weight: 800; letter-spacing: -1.5px; line-height: 1; }
+.bar { height: 10px; border-radius: 6px; background: var(--track); overflow: hidden; margin-top: 6px; }
+.bar i { display: block; height: 100%; border-radius: 6px; background: var(--accent); }
 .bar i.over { background: var(--danger); }
 table { width: 100%; border-collapse: collapse; margin-top: 8px; }
 th { font-size: 12px; color: var(--muted); font-weight: 600; text-align: right; padding: 5px 0; }
 th:first-child, td:first-child { text-align: left; }
-td { font-size: 15px; text-align: right; padding: 7px 0; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+td { font-size: 15px; text-align: right; padding: 8px 0; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
 #nav {
   position: fixed; bottom: 0; left: 0; right: 0;
-  background: var(--card); border-top: 1px solid var(--line);
+  background: rgba(11,12,9,0.94); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
   display: flex; padding-bottom: env(safe-area-inset-bottom); z-index: 10;
 }
 #nav button {
   flex: 1; border: 0; background: transparent; color: var(--muted);
-  padding: 10px 0 8px; font-size: 11px; font-weight: 700; cursor: pointer;
+  padding: 12px 0 9px; font-size: 11px; font-weight: 700; cursor: pointer;
 }
-#nav button .ic { display: block; font-size: 22px; margin-bottom: 2px; }
+#nav button .ic { display: block; font-size: 22px; margin-bottom: 2px; filter: grayscale(1) brightness(1.6); opacity: .55; }
 #nav button.on { color: var(--accent); }
+#nav button.on .ic { filter: none; opacity: 1; }
 #toast {
   position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
-  background: var(--ink); color: var(--bg); padding: 9px 18px;
-  border-radius: 999px; font-size: 14px; font-weight: 600; z-index: 20;
+  background: var(--accent); color: var(--accent-ink); padding: 10px 18px;
+  border-radius: 999px; font-size: 14px; font-weight: 750; z-index: 20;
   opacity: 0; transition: opacity .2s; pointer-events: none; max-width: 90%;
 }
 #toast.show { opacity: 1; }
 .setnum { color: var(--muted); font-size: 13px; width: 44px; flex: none; }
 .wt { font-weight: 700; font-variant-numeric: tabular-nums; }
-.badge { font-size: 13px; font-weight: 700; }
-.badge.up { color: var(--good); }
-.badge.dn { color: var(--danger); }
-.exname { font-weight: 650; }
+.badge {
+  font-size: 12px; font-weight: 800; border-radius: 999px; padding: 4px 10px;
+  background: var(--accent); color: var(--accent-ink); flex: none;
+}
+.badge.dn { background: var(--danger); color: #1c0d09; }
+.exname { font-weight: 650; font-size: 15px; }
 .spark { flex: none; }
 .center { text-align: center; }
 .mt { margin-top: 12px; }
 .small { font-size: 13px; }
-.kv { display: flex; justify-content: space-between; font-size: 14px; margin-top: 6px; }
+.kv { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -472,6 +469,31 @@ function viewFood(){
   return h;
 }
 
+function weekBars(){
+  var td = today();
+  var days = [];
+  for (var i = 6; i >= 0; i--) {
+    var d = addDays(td, -i);
+    var w = wkFor(d);
+    days.push({ d: d, n: w ? w.gym_sets.length : 0 });
+  }
+  var max = 1;
+  days.forEach(function(x){ if (x.n > max) max = x.n; });
+  var hot = -1;
+  days.forEach(function(x, i){ if (x.n > 0) hot = i; });
+  var W = 320, bw = 28, gap = (W - 7 * bw) / 6;
+  var s = '<svg width="100%" viewBox="0 0 ' + W + ' 112" style="display:block;margin-top:14px">';
+  days.forEach(function(x, i){
+    var bh = x.n ? Math.max(16, 74 * x.n / max) : 8;
+    var xx = r1(i * (bw + gap));
+    var yy = r1(92 - bh);
+    s += '<rect x="' + xx + '" y="' + yy + '" width="' + bw + '" height="' + r1(bh) + '" rx="12" fill="' + (i === hot ? 'var(--accent)' : 'var(--track)') + '"/>';
+    if (i === hot) s += '<text x="' + r1(xx + bw/2) + '" y="' + (yy - 7) + '" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">' + x.n + '</text>';
+    s += '<text x="' + r1(xx + bw/2) + '" y="108" text-anchor="middle" font-size="9" fill="var(--muted)">' + DAYS[parseD(x.d).getDay()] + '</text>';
+  });
+  return s + '</svg>';
+}
+
 function viewHome(){
   var st = D.settings;
   var td = today();
@@ -482,12 +504,15 @@ function viewHome(){
   var setsWeek = 0;
   wkThis.forEach(function(w){ setsWeek += w.gym_sets.length; });
   var saunas30 = wk30.filter(function(w){ return w.sauna; }).length;
-  var h = '<h1>Home</h1>';
+  var h = '<h1>Report</h1>';
+  h += '<div class="card"><div class="kv"><h2>Workout overview</h2><span class="sub">last 7 days</span></div>' +
+    '<div class="row mt"><div><div class="hero-num">' + wkThis.length + '</div><div class="sub">gym days this week</div></div></div>' +
+    weekBars() + '</div>';
   h += '<div class="tiles">' +
-    '<div class="tile"><div class="l">Gym days this week</div><div class="v">' + wkThis.length + '</div></div>' +
     '<div class="tile"><div class="l">Gym days &middot; 30d</div><div class="v">' + wk30.length + '</div></div>' +
     '<div class="tile"><div class="l">Sets this week</div><div class="v">' + setsWeek + '</div></div>' +
-    '<div class="tile"><div class="l">Saunas &middot; 30d</div><div class="v">' + saunas30 + '</div></div></div>';
+    '<div class="tile"><div class="l">Saunas &middot; 30d</div><div class="v">' + saunas30 + '</div></div>' +
+    '<div class="tile"><div class="l">Protein today</div><div class="v">' + r0(macroTotals(foodFor(td)).p) + 'g</div></div></div>';
   // weight
   var wts = D.weights;
   var cur = wts.length ? +wts[wts.length-1].weight_kg : null;
