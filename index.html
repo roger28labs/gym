@@ -170,6 +170,7 @@ function api(path, method, body){
 
 function boot(){
   render();
+  if (!KEY) return;
   api('/api/bootstrap').then(function(d){ D = d; render(); })
     .catch(function(e){ toast(e.message); });
 }
